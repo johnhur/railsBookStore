@@ -1,0 +1,18 @@
+<h1>Books#new</h1>
+<p>Find me in app/views/books/new.html.erb</p>
+
+<% if (@book.errors.any?) %>
+	<% @book.errors.full_messages.each do |error| %>
+	<p style="color:red;">
+		<%= error %>
+	</p>
+	<% end %>
+<% end %>
+
+<%= form_for [@author, @book] do |z| %>
+	<%= z.label "title" %>
+	<%= z.text_field :title %><br/>
+	<%= z.label "description" %>
+	<%= z.text_field :description %><br/>
+	<%= z.submit "Create book" %>
+<% end %>

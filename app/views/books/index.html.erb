@@ -1,0 +1,17 @@
+<h1>Books#index</h1>
+<p>Find me in app/views/books/index.html.erb</p>
+
+<%= link_to "Add a New Book", new_author_book_path %>
+Books by <%= @author.first_name %> <%= @author.last_name %>
+
+
+
+<% @author.books.each do |book| %>
+	<p>id: <%= book.id %>
+	name: <%= book.title%>
+	<%= link_to "show", book_path(book) %>
+	<%= link_to "edit", edit_book_path(book) %>
+	<%= link_to "remove", book_path(book), method: :delete, data: {confirm: "Are you sure?"} %></p>
+<% end %>
+
+

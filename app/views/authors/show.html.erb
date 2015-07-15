@@ -1,0 +1,8 @@
+<h1>Authors#show</h1>
+<p>Find me in app/views/authors/show.html.erb</p>
+
+<%= @author.first_name %>
+<%= @author.last_name %>
+<%= @author.age %>
+
+<%= link_to "#{@author.first_name}'s Books", author_books_path(@author) %>

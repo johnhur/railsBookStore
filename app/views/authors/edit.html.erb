@@ -1,0 +1,20 @@
+<h1>Authors#edit</h1>
+<p>Find me in app/views/authors/edit.html.erb</p>
+
+<% if (@author.errors.any?) %>
+	<% @author.errors.full_messages.each do |error| %>
+	<p style="color:red;">
+		<%= error %>
+	</p>
+	<% end %>
+<% end %>
+
+<%= form_for @author do |z|%>
+<%= z.label "first_name" %>
+<%= z.text_field :first_name %><br/>
+<%= z.label "last_name" %>
+<%= z.text_field :last_name %><br/>
+<%= z.label "age" %>
+<%= z.number_field :age %><br/>
+<%= z.submit "Edit Author" %>
+<% end %>
