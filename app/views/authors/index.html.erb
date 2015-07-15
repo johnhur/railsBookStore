@@ -1,14 +1,16 @@
-<h1>Authors#index</h1>
-<p>Find me in app/views/authors/index.html.erb</p>
+<h1>Welcome to the John's Rails Library</h1>
+<p>// This is a CRUD application made with Ruby On Rails</p>
+<p>// The Authors are listed below</p>
+
+<button class=".btn-info"><%= link_to "Add an Author", new_author_path %></button>
 
 
-<%= link_to "Add an Author", new_author_path %>
 <div>
 <ul>
 <% @authors.each do |author| %>
 
-<li>ID: <%= author.id %> Author: <%= author.first_name %> <%= author.last_name %>
-Age: <%= author.age %>
+<li>Author: <%= author.first_name %> // <%= author.last_name %> //
+Age: <%= author.age %> // Books: <%= author.books.length %>
 <%= link_to "show", author_path(author) %>
 <%= link_to "edit", edit_author_path(author) %>
 <%= link_to "remove", author_path(author), method: :delete, data: {confirm: "Are you sure?"} %></li>

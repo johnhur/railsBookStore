@@ -1,15 +1,17 @@
 class BooksController < ApplicationController
+	before_action :find_author, only: [:index, :new, :create]
+	before_action :find_book, only: [:show, :edit, :update, :destroy]
+
   def index
-  	@author = Author.find_by_id params[:author_id]
   end
 
   def new
   	@book = Book.new
-  	@author = Author.find params[:author_id]
+  	
   end
 
   def create
-  	@author = Author.find params[:author_id]
+  	
   	@book = @author.books.create(book_params)
 
   			if @book.save
@@ -24,17 +26,14 @@ class BooksController < ApplicationController
 
 
   def show
-  	@book = Book.find_by_id params[:id] 
+  	
   end
 
   def edit
-  	@book = Book.find params[:id]
   end
 
   def update
-  	@book = Book.find params[:id]
   	@book.update(book_params)
-
   	if @book.save
   		flash[:success] = "Successfully Created!"
   		redirect_to author_books_path(@book.author)
@@ -43,17 +42,22 @@ class BooksController < ApplicationController
   		render :new
   	end
   end
-  
-
 
   def destroy
-  	@book = Book.find_by_id params[:id]
   	@book.destroy
-  	redirect_to author_books_path(@book.author)
+  	redirect_to author_books_path(@book.author), notice: "#{@book.title} has been removed :("
   end
 
 
   private
+  def find_author
+  	@author = Author.find params[:author_id]
+  end
+
+  def find_book
+  	@book = Book.find params[:id]
+  end
+
   def book_params
   	book_params = params.require(:book).permit(:title, :description)
   end

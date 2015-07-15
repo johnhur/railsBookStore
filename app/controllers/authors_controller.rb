@@ -1,4 +1,7 @@
 class AuthorsController < ApplicationController
+
+	before_action :find_author, only: [:show, :edit, :update, :destroy]
+
   def index
   	@authors = Author.all
   end
@@ -23,15 +26,15 @@ class AuthorsController < ApplicationController
 
 
   def show
-  	@author = Author.find_by_id params[:id]
+  	
   end
 
   def edit
-  	@author = Author.find_by_id params[:id]
+  	
   end
 
   def update
-  	@author = Author.find_by_id params[:id]
+  	
   	@author.update(author_params)
   	if@author.save
   		flash[:success] = "Successfully Updated!"
@@ -43,12 +46,16 @@ class AuthorsController < ApplicationController
   end
 
   def destroy
-  	@author = Author.find_by_id params[:id]
+  	
   	@author.destroy
   	redirect_to authors_path, notice: "#{@author[:first_name]} was deleted from this application :("
   end
 
   private
+  		def find_author
+  			@author = Author.find_by_id params[:id]
+  		end
+
     	def author_params
   			author_params = params.require(:author).permit(:first_name, :last_name, :age)
   		end
